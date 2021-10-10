@@ -1,4 +1,5 @@
 // TODO: Include packages needed for this application
+const { ok } = require('assert');
 const fs = require('fs');
 const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown.js')
@@ -70,38 +71,10 @@ const promptUser = () => {
                 message: 'List your collaborators, if any, with links to their Github profiles. If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section. If you followed tutorials, include links to those here as well.'
             },
             {
-                type: 'input',
+                type: 'checkbox',
                 name: 'license',
-                message: 'The last section of a good README is a license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, use [https://choosealicense.com/](https://choosealicense.com/)'
-            },
-            {
-                type: 'confirm',
-                name: 'extras',
-                message: 'Would you like to add further optional details to your readMe (Badges, features, contributing guidelines, tests)?',
-                default: false
-                
-            }
-        ])
-        .then((response) => {
-            if (response.extras = true) {
-                promptExtras();
-            }
-        }
-        )
-}
-
-const promptExtras = () => {
-    console.log(`
-    ===============
-    Extra readMe details
-    ===============
-    `);
-        return inquirer.prompt([
-
-            {
-                type: 'input',
-                name: 'badges',
-                message: ''
+                message: 'The last section of a good README is a license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, use [https://choosealicense.com/](https://choosealicense.com/)',
+                choices: ['Apache', 'Boost', 'BSD', 'CC0', 'Eclipse', 'GNU', 'IBM', 'ISC', 'MIT', 'Mozilla', 'Perl', 'Artistic', 'SIL', 'Unlicense', 'WTFPL', 'Zlib']
             },
             {
                 type: 'input',
@@ -113,18 +86,43 @@ const promptExtras = () => {
                 name: 'Contribution Guidelines',
                 message: 'If you would like other developers to contribute to this project, add the contribution guidelines here.'
             }
+
         ])
-        .then()
 }
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-    generateMarkdown(data)
-}
+const writeFile = fileContent => {
+    return new Promise((resolve, reject) => {
+        fs.writeFile('./dist/README.md', fileContent, err => {
+            if (err) {
+                reject(err);
+                return;
+            }
+
+            resolve({
+                ok: true,
+                message: 'Readme created!'
+            });
+        });
+    });
+};
 
 // TODO: Create a function to initialize app
 function init() {
-    promptUser();
-}
+    promptUser()
+//        .then(promptExtras)
+        .then(data => {
+            return generateMarkdown(data);
+        })
+        .then(pageReadMe => {
+            return writeFile(pageReadMe);
+        })
+        .then(writeFileResponse => {
+            console.log(writeFileResponse);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+};
 
 // Function call to initialize app
 init();

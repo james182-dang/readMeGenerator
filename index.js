@@ -73,51 +73,57 @@ const promptUser = () => {
                 type: 'input',
                 name: 'license',
                 message: 'The last section of a good README is a license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, use [https://choosealicense.com/](https://choosealicense.com/)'
+            },
+            {
+                type: 'confirm',
+                name: 'extras',
+                message: 'Would you like to add further optional details to your readMe (Badges, features, contributing guidelines, tests)?',
+                default: false
+                
             }
         ])
+        .then((response) => {
+            if (response.extras = true) {
+                promptExtras();
+            }
+        }
+        )
 }
 
-// const promptExtras = () => {
-//     return inquirer
-//         .prompt([
-//             {
-//                 type: 'confirm',
-//                 name: 'extras',
-//                 message: 'Would you like to add further optional details to your readMe (Badges, features, contributing guidelines, tests)?',
-//                 default: false
-//             }
-//         ])
-//     console.log(`
-//     ===============
-//     Extra readMe details
-//     ===============
-//     `);
-//         return inquirer.prompt([
-//             {
-//                 type: 'input',
-//                 name: 'badges',
-//                 message: ''
-//             },
-//             {
-//                 type: 'input',
-//                 name: 'features',
-//                 message: 'If your project has a lot of features, consider adding a heading called "Features" and list them here.'
-//             },
-//             {
-//                 type: 'input',
-//                 name: 'Contribution Guidelines',
-//                 message: 'If you would like other developers to contribute to this project, add the contribution guidelines here.'
-//             }
-//         ])
-//         .then()
-// }
+const promptExtras = () => {
+    console.log(`
+    ===============
+    Extra readMe details
+    ===============
+    `);
+        return inquirer.prompt([
+
+            {
+                type: 'input',
+                name: 'badges',
+                message: ''
+            },
+            {
+                type: 'input',
+                name: 'features',
+                message: 'If your project has a lot of features, consider adding a heading called "Features" and list them here.'
+            },
+            {
+                type: 'input',
+                name: 'Contribution Guidelines',
+                message: 'If you would like other developers to contribute to this project, add the contribution guidelines here.'
+            }
+        ])
+        .then()
+}
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+    generateMarkdown(data)
+}
 
 // TODO: Create a function to initialize app
 function init() {
-    promptUser()
-        .then
+    promptUser();
 }
 
 // Function call to initialize app

@@ -1,6 +1,12 @@
-# jam
+# no 
 
-  # Built by jam at jam
+  # Built by 
+  
+  James at github.com/James182-dang
+
+  # Description
+
+  no
 
   # Built with 
   
@@ -20,8 +26,4 @@
 
   # Licenses
 
-  This application is licensed by Apache
-
-
-
-
+  Apache

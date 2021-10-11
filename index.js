@@ -49,6 +49,11 @@ const promptUser = () => {
                 }
             },
             {
+                type: 'input',
+                name: 'description',
+                message: 'Please input a short description of your application.'
+            },
+            {
                 type: 'checkbox',
                 name: 'languages',
                 message: 'What programming languages are used with this project?',
@@ -92,7 +97,7 @@ const promptUser = () => {
 // TODO: Create a function to write README file
 const writeFile = fileContent => {
     return new Promise((resolve, reject) => {
-        fs.writeFile('./dist/README.md', fileContent, err => {
+        fs.writeFile('./dist/readMe.md', fileContent, err => {
             if (err) {
                 reject(err);
                 return;
@@ -109,7 +114,6 @@ const writeFile = fileContent => {
 // TODO: Create a function to initialize app
 function init() {
     promptUser()
-//        .then(promptExtras)
         .then(data => {
             return generateMarkdown(data);
         })

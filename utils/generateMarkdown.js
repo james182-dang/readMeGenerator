@@ -90,7 +90,7 @@ function generateMarkdown(data) {
 
   # Built by 
   
-  ${data.name} at github.com/${data.github}
+  ${data.name}
 
   # Description
 
@@ -110,11 +110,23 @@ function generateMarkdown(data) {
 
   # Credits
 
-  Collaborators on this project are ${data.credits}
+  Collaborators on this project are as follows:
+  
+  ${data.credits}
 
   # Licenses
 
   ${data.license}
+
+  # Tests
+
+  # Questions
+
+  Have questions about the project? Feel free to reach out to me at these locations:
+
+  Email: ${data.email}
+
+  Github: github.com/${data.github}
 `;
 }
 

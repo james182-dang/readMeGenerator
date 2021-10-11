@@ -37,6 +37,18 @@ const promptUser = () => {
             },
             {
                 type: 'input',
+                name: 'email',
+                message: 'Please enter your email for the contact section of your readme.',
+                validate: emailInput => {
+                    if (emailInput) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            },
+            {
+                type: 'input',
                 name: 'title',
                 message: 'Please enter the name of your project (Required)',
                 validate: titleInput => {

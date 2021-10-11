@@ -102,7 +102,7 @@ function generateMarkdown(data) {
 
   # Installation
 
-  ${data.install}
+  ${data.installation}
 
   # Usage 
 
@@ -126,7 +126,7 @@ function generateMarkdown(data) {
 
   Email: ${data.email}
 
-  Github: github.com/${data.github}
+  Github: https://github.com/${data.github}
 `;
 }
 
